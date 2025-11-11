@@ -1,0 +1,46 @@
+// Value rules ---
+
+// Number
+int = @{"0" | (ASCII_NONZERO_DIGIT ~ ASCII_DIGIT*)}
+frac = @{"." ~ ASCII_DIGIT+}
+exp = @{("E" | "e") ~ ("+" | "-")? ~ ASCII_DIGIT+ }
+number = @{"-"? ~ int ~ frac? ~ exp?}
+
+// Whitespace 
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+
+// String
+string = ${"\"" ~ inner ~ "\""}
+inner = @{char*}
+char = {
+    !("\"" | "\\") ~ ANY
+    | "\\" ~ ("\"" | "\\" | "/" | "b" | "f" | "n" | "r" | "t")
+    | "\\" ~ ("u" ~ ASCII_HEX_DIGIT{4})
+}
+
+// Value
+value = _{ object | array | string | number | boolean | null }
+
+boolean = { "true" | "false" }
+
+null = { "null" }
+
+// Pair
+pair = { string ~ ":" ~ value }
+
+// Object
+
+object = {
+    "{" ~ "}" |
+    "{" ~ pair ~ ("," ~ pair)* ~ "}"
+}
+
+// Array
+array = {
+    "[" ~ "]" |
+    "[" ~ value ~ ("," ~ value)* ~ "]"
+}
+
+file = _{
+   SOI ~ (object | array) ~ EOI
+}
