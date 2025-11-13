@@ -1,4 +1,4 @@
-use json_parser::{JSONError, parse_json_file, serialize_jsonvalue};
+use vals_json_parser::{JSONError, parse_json_file, serialize_jsonvalue};
 use std::fs;
 use std::path::PathBuf;
 use clap::{Parser, Subcommand};

@@ -1,5 +1,5 @@
 use anyhow::*;
-use json_parser::*;
+use vals_json_parser::*;
 use pest::Parser;
 
 #[test]
