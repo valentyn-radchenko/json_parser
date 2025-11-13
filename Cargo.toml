@@ -1,5 +1,5 @@
 [package]
-name = "json_parser"
+name = "vals_json_parser"
 version = "0.1.0"
 edition = "2024"
 description = "A Rust project that implements a JSON parser using the Pest parsing library. It reads JSON text input and converts it into a structured internal representation."
