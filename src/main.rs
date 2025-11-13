@@ -11,7 +11,6 @@ use clap::{Parser, Subcommand};
     about="A Rust project that implements a JSON parser using the Pest parsing library.",
     long_about=None
 )]
-
 struct Cli{
     #[command(subcommand)]
     command: Commands
@@ -43,18 +42,12 @@ fn main() -> Result<(), JSONError> {
 
             if ast {
                 println!("AST:\n{value:#?}");
-            }
-
-            match out {
-                Some(path) => {
+            }  
+                if let Some(path) = out {
                     let serialized = serialize_jsonvalue(&value);
                     fs::write(&path, serialized)?;
                     println!("Wrote serialized output to {}", path.display());
                 }
-                None => {
-                    
-                }
-            }
         }
 
         Commands::Credits => {
